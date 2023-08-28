@@ -10,6 +10,10 @@ public class SavingAccount extends Account {
     protected int minBalance;
     protected int maxBalance;
 
+    public int initialBalance;
+
+    public int amount;
+
     /**
      * Создаёт новый объект сберегательного счёта с заданными параметрами.
      * Если параметры некорректны (мин. баланс больше максимального и так далее), то
@@ -25,7 +29,7 @@ public class SavingAccount extends Account {
               "Накопительная ставка не может быть отрицательной, а у вас: " + rate
             );
         }
-        this.balance = initialBalance;
+        this.initialBalance = initialBalance;
         this.minBalance = minBalance;
         this.maxBalance = maxBalance;
         this.rate = rate;
@@ -45,8 +49,8 @@ public class SavingAccount extends Account {
         if (amount <= 0) {
             return false;
         }
-        balance = balance - amount;
-        if (balance > minBalance) {
+        initialBalance = initialBalance - amount;
+        if (initialBalance > minBalance) {
             return true;
         } else {
             return false;
@@ -69,8 +73,8 @@ public class SavingAccount extends Account {
         if (amount <= 0) {
             return false;
         }
-        if (balance + amount < maxBalance) {
-            balance = amount;
+        if (initialBalance + amount < maxBalance) {
+            initialBalance = amount;
             return true;
         } else {
             return false;
@@ -86,7 +90,7 @@ public class SavingAccount extends Account {
      */
     @Override
     public int yearChange() {
-        return balance / 100 * rate;
+        return initialBalance / 100 * rate;
     }
 
     public int getMinBalance() {
@@ -95,5 +99,13 @@ public class SavingAccount extends Account {
 
     public int getMaxBalance() {
         return maxBalance;
+    }
+
+    public int getInitialBalance() {
+        return initialBalance;
+    }
+
+    public int getAmount() {
+        return amount;
     }
 }

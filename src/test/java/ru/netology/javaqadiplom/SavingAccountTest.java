@@ -16,6 +16,29 @@ public class SavingAccountTest {
 
         account.add(3_000);
 
-        Assertions.assertEquals(2_000 + 3_000, account.getBalance());
+        int expected = 2_000 + 3_000;
+        int actual = account.add(3_000);
+
+
+        Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    public void testMethodPay() {
+        SavingAccount account = new SavingAccount(
+                2_000,
+                1_000,
+                10_000,
+                5
+        );
+        account.pay(500);
+
+        int expected = 2_000 + 5000;
+        int actual = account.pay(500);
+
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+
 }
